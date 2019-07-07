@@ -17,6 +17,7 @@ static NSString * const PCActionClearOrShot = @"PCActionClearOrShot";
 static NSString * const PCActionSwitchOrPass = @"PCActionSwitchOrPass";
 static NSString * const PCActionDash = @"PCActionDash";
 static NSString * const PCActionStartButton = @"PCActionStartButton";
+static NSString * const PCActionMenuButton = @"PCActionMenuButton";
 
 static NSString * const LeftThumbstick = @"LeftThumbstick";
 static NSString * const RightThumbstick = @"RightThumbstick";
@@ -47,6 +48,7 @@ typedef enum {
     kPCActionSwitchOrPass,
     kPCActionDash,
     kPCActionStartButton,
+    kPCActionMenuButton,
     kPCActionUndefined,
     
 } PCActionType;

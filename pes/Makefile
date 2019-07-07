@@ -21,4 +21,4 @@ PESC_LDFLAGS = -miphoneos-version-min=9.0 -undefined dynamic_lookup
 include $(THEOS_MAKE_PATH)/tweak.mk
 
 after-install::
-	install.exec "killall -9 ShadowTrackerExtra"
+	install.exec "killall -9 PES19CBT"

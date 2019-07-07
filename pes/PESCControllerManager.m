@@ -580,7 +580,7 @@
     profile.rightTrigger.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed)
     {
         if (pressed && [self selectOrStartMode] == 0){
-            // NSLog(@"rightTrigger");
+             NSLog(@"rightTrigger");
             CGPoint punchRight = PAT([self actionTypeForControllerButton:RightTrigger]);//PAT(kPGBActionTypeRight);
             if (currentRightTouch){
                 [[self IOSView] finishTouch:currentRightTouch];
@@ -1002,6 +1002,11 @@
         case kPCActionStartButton:
             outpoint = [self convertPointForScreen:CGPointMake(184,258)];
             break;
+            
+        case kPCActionMenuButton:
+            outpoint = [self convertPointForScreen:CGPointMake(701,26)];
+            break;
+            
             
        
         default:
