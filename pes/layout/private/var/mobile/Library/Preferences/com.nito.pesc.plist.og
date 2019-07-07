@@ -3,36 +3,36 @@
 <plist version="1.0">
 <dict>
 	<key>ButtonA</key>
-	<string>PCActionThroughOrPress</string>
+	<string>PCActionDash</string>
 	<key>ButtonB</key>
 	<string>PCActionClearOrShot</string>
 	<key>ButtonX</key>
 	<string>PCActionSwitchOrPass</string>
 	<key>ButtonY</key>
-	<string>PCActionDash</string>
-	<key>LeftShoulder</key>
-	<string>PCActionDash</string>
-	<key>RightShoulder</key>
-	<string>PCActionDash</string>
-	<key>LeftTrigger</key>
-	<string>PCActionDash</string>
-	<key>RightTrigger</key>
-	<string>PCActionDash</string>
-	<key>RightThumbstickButton</key>
-	<string>PCActionDash</string>
-	<key>LeftThumbstickButton</key>
-	<string>PCActionDash</string>
-	<key>Dpad.up</key>
-	<string>PCActionDash</string>
+	<string>PCActionThroughOrPress</string>
 	<key>Dpad.down</key>
 	<string>PCActionDash</string>
 	<key>Dpad.left</key>
 	<string>PCActionDash</string>
 	<key>Dpad.right</key>
 	<string>PCActionDash</string>
-	<key>Menu</key>
+	<key>Dpad.up</key>
 	<string>PCActionDash</string>
 	<key>ExperimentalControl</key>
 	<true/>
+	<key>LeftShoulder</key>
+	<string>PCActionClearOrShot</string>
+	<key>LeftThumbstickButton</key>
+	<string>PCActionDash</string>
+	<key>LeftTrigger</key>
+	<string>PCActionClearOrShot</string>
+	<key>Menu</key>
+	<string>PCActionDash</string>
+	<key>RightShoulder</key>
+	<string>PCActionDash</string>
+	<key>RightThumbstickButton</key>
+	<string>PCActionDash</string>
+	<key>RightTrigger</key>
+	<string>PCActionDash</string>
 </dict>
 </plist>

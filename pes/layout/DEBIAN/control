@@ -2,8 +2,7 @@ Package: com.nito.pesc
 Name: pesc 
 Version: 1.0
 Architecture: iphoneos-arm
-Description: Add MFI controller support to PESC 2019
+Description: Add MFI controller support to Pro Evolution Soccer 2019
 Maintainer: Kevin Bradley
 Author: Kevin Bradley
 Section: Tweaks
-Depiction: https://wiki.awkwardtv.org/wiki/Pesc

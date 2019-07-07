@@ -353,7 +353,7 @@
         [view addGestureRecognizer:touchSurfaceDoubleTapRecognizer];
         _tapSetup = TRUE;
         NSLog(@"#### show alert??");
-        [RKDropdownAlert title:@"PESC 1.4 Activated" message:@"Tap here now OR double tap anywhere on the screen with two fingers to bring up the control customization window." backgroundColor:[UIColor redColor] textColor:[UIColor whiteColor] time:3 delegate:self];
+        [RKDropdownAlert title:@"PESC 1.0 Activated" message:@"Tap here now OR double tap anywhere on the screen with two fingers to bring up the control customization window." backgroundColor:[UIColor redColor] textColor:[UIColor whiteColor] time:3 delegate:self];
     }
 }
 
@@ -630,14 +630,20 @@
         }
     };
     
-    
+    __block UITouch *buttonBTouch = nil;
     profile.buttonB.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed)
     {
         if (pressed)
         {
             //NSLog(@"ButtonB");
             CGPoint laydown = PAT([self actionTypeForControllerButton:ButtonB]);//PAT(kPGBActionTypeConceal);
-            [[self IOSView] tapAtPoint:laydown];
+           buttonBTouch = [[self IOSView] tapDownAtPoint:laydown];
+        } else {
+            if (buttonBTouch) {
+                [[self IOSView] finishTouch:buttonBTouch];
+                buttonBTouch = nil;
+            }
+            
         }
     };
     
@@ -650,14 +656,19 @@
             [[self IOSView] tapAtPoint:run];
         }
     };
-    
+    __block UITouch *buttonYTouch = nil;
     profile.buttonY.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed)
     {
         if (pressed)
         {
             //NSLog(@"buttonY");
             CGPoint crouch = PAT([self actionTypeForControllerButton:ButtonY]);//PAT(kPGBActionTypeCrouch);
-            [[self IOSView] tapAtPoint:crouch];
+            buttonYTouch = [[self IOSView] tapDownAtPoint:crouch];
+        } else {
+            if (buttonYTouch) {
+                [[self IOSView] finishTouch:buttonYTouch];
+                buttonYTouch = nil;
+            }
             
         }
     };
