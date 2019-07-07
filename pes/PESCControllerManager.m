@@ -16,7 +16,6 @@
 #import "PESCPrefTableViewController.h"
 #import "NSObject+AssociatedObjects.h"
 #import "UIWindow+Additions.h"
-#import "RKDropdownAlert/RKDropdownAlert.h"
 #import "NSDictionary+nullRemoval.h"
 
 //screen size
@@ -101,7 +100,7 @@
     UIViewController *tvc = [self topViewController];
     //NSLog(@"tvc: %@", tvc);
     NSString *topViewClass = NSStringFromClass(tvc.class);
-    if ([topViewClass containsString:@"PUB"]){
+    if ([topViewClass containsString:@"PESC"]){
         return TRUE;
     }
     return FALSE;
@@ -293,8 +292,10 @@
             jsonDict[@"playenv_operation_type"] = @1;
             jsonDict[@"playenv_vpad_movement_type"] = @0;
             NSString *output = [jsonDict JSONStringRepresentation];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             [output writeToFile:dataFile atomically:TRUE];
-            
+#pragma clang diagnostic pop
         } else {
             NSLog(@"its probably fine");
         }
@@ -524,7 +525,9 @@
     //L3/R3 are API specific, but since i do the lazy category above to add this to everything, respondsToSelector wouldn't be sufficient.
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"12.1")){
-        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunguarded-availability-new"
+
         profile.leftThumbstickButton.valueChangedHandler = ^(GCControllerButtonInput * _Nonnull button, float value, BOOL pressed) {
             
             if (pressed){
@@ -544,6 +547,7 @@
             }
             
         };
+    #pragma clang diagnostic pop
     }
     
     profile.dpad.valueChangedHandler = ^(GCControllerDirectionPad * _Nonnull dpad, float xValue, float yValue) {

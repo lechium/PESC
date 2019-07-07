@@ -22,19 +22,25 @@
     return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
-
 - (NSString *)stringRepresentation
 {
 	NSString *error = nil;
-	NSData *xmlData = [NSPropertyListSerialization dataFromPropertyList:self format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
-	NSString *s=[[NSString alloc] initWithData:xmlData encoding: NSUTF8StringEncoding];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    NSData *xmlData = [NSPropertyListSerialization dataFromPropertyList:self format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+#pragma clang diagnostic pop
+
+    NSString *s=[[NSString alloc] initWithData:xmlData encoding: NSUTF8StringEncoding];
 	return s;
 }
 
 - (NSString *)base64String
 {
     NSString *error = nil;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     NSData *xmlData = [NSPropertyListSerialization dataFromPropertyList:self format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+    #pragma clang diagnostic pop
     return [xmlData base64EncodedStringWithOptions:0];
 }
 

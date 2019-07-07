@@ -4,7 +4,14 @@
 #import "NSObject+AssociatedObjects.h"
 //#import "FingerTips/MBFingerTipWindow.h"
 
+%hook GCController
 
++ (NSArray<GCController *> *)controllers {
+
+    return nil;
+}
+
+%end
 
 
 %hook IOSAppDelegate
