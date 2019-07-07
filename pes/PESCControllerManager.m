@@ -17,6 +17,7 @@
 #import "NSObject+AssociatedObjects.h"
 #import "UIWindow+Additions.h"
 #import "RKDropdownAlert/RKDropdownAlert.h"
+#import "NSDictionary+nullRemoval.h"
 
 //screen size
 #define SCREEN_WIDTH [[UIScreen mainScreen] bounds].size.width
@@ -217,7 +218,7 @@
         NSMutableDictionary *dictionary = [self.controllerPreferences mutableCopy];
         NSString *preferenceFile = [[self documentsFolder] stringByAppendingPathComponent:@"com.nito.pesc.plist"];
         [dictionary setValue:value forKey:theKey];
-        NSLog(@"updatedDictionary: %@", dictionary);
+        //NSLog(@"updatedDictionary: %@", dictionary);
         self.gamePlayDictionary = dictionary;
         [dictionary writeToFile:preferenceFile atomically:true];
     }
@@ -226,7 +227,7 @@
 
 -(BOOL)dropdownAlertWasTapped:(RKDropdownAlert*)alert {
     
-    NSLog(@"#### dropdownAlertWasTapped???");
+    //NSLog(@"#### dropdownAlertWasTapped???");
     
     if (!self.menuVisible){
         [self performSelector:@selector(showControlEditingView) withObject:nil afterDelay:1];
@@ -236,7 +237,7 @@
 }
 -(BOOL)dropdownAlertWasDismissed {
 
-    NSLog(@"#### dropdownAlertWasDismissed???");
+    //NSLog(@"#### dropdownAlertWasDismissed???");
     return YES;
     
 }
@@ -271,12 +272,35 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(controllerDisconnected:) name:GCControllerDidDisconnectNotification object:nil];
     [GCController startWirelessControllerDiscoveryWithCompletionHandler:nil];
     NSString *dataFile = [[self documentsFolder] stringByAppendingPathComponent:@"SaveData/SystemData.dat"];
-    NSData *theData = [NSData dataWithContentsOfFile:dataFile];
-    NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:theData options:NSJSONReadingAllowFragments error:nil];
-    NSInteger controllerType = [jsonDict[@"playenv_operation_type"] integerValue];
-    NSInteger dpadType = [jsonDict[@"playenv_vpad_movement_type"] integerValue];
-    NSLog(@"all keys: %@", [jsonDict allKeys]);
-    
+    if ([[NSFileManager defaultManager] fileExistsAtPath:dataFile]){
+        
+        NSData *theData = [NSData dataWithContentsOfFile:dataFile];
+        NSMutableDictionary *jsonDict = [[NSJSONSerialization JSONObjectWithData:theData options:NSJSONReadingAllowFragments error:nil] mutableCopy];
+        NSInteger controllerType = [jsonDict[@"playenv_operation_type"] integerValue];
+        NSInteger dpadType = [jsonDict[@"playenv_vpad_movement_type"] integerValue];
+        NSLog(@"controllerType: %lu", controllerType);
+        NSLog(@"dpadType: %lu", dpadType);
+        /*
+         default    22:51:44.015889 -0700    PES19CBT    controllerType: 1
+         default    22:51:44.016636 -0700    PES19CBT    dpadType: 0
+
+         
+         */
+        
+        if (controllerType != 1 || dpadType != 0){
+         
+            NSLog(@"thas bad!");
+            jsonDict[@"playenv_operation_type"] = @1;
+            jsonDict[@"playenv_vpad_movement_type"] = @0;
+            NSString *output = [jsonDict JSONStringRepresentation];
+            [output writeToFile:dataFile atomically:TRUE];
+            
+        } else {
+            NSLog(@"its probably fine");
+        }
+            
+        
+    }
 }
 
 
@@ -580,7 +604,7 @@
     profile.rightTrigger.valueChangedHandler = ^(GCControllerButtonInput *button, float value, BOOL pressed)
     {
         if (pressed && [self selectOrStartMode] == 0){
-             NSLog(@"rightTrigger");
+             //NSLog(@"rightTrigger");
             CGPoint punchRight = PAT([self actionTypeForControllerButton:RightTrigger]);//PAT(kPGBActionTypeRight);
             if (currentRightTouch){
                 [[self IOSView] finishTouch:currentRightTouch];
