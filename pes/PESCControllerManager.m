@@ -277,8 +277,8 @@
         NSMutableDictionary *jsonDict = [[NSJSONSerialization JSONObjectWithData:theData options:NSJSONReadingAllowFragments error:nil] mutableCopy];
         NSInteger controllerType = [jsonDict[@"playenv_operation_type"] integerValue];
         NSInteger dpadType = [jsonDict[@"playenv_vpad_movement_type"] integerValue];
-        NSLog(@"controllerType: %lu", controllerType);
-        NSLog(@"dpadType: %lu", dpadType);
+        NSLog(@"controllerType: %ld", (long)controllerType);
+        NSLog(@"dpadType: %ld", (long)dpadType);
         /*
          default    22:51:44.015889 -0700    PES19CBT    controllerType: 1
          default    22:51:44.016636 -0700    PES19CBT    dpadType: 0
@@ -390,11 +390,11 @@
     self.gameController = controller;
 
     GCExtendedGamepad *profile = self.gameController.extendedGamepad;
-    
+    @weakify(self);
     self.gameController.controllerPausedHandler = ^(GCController * _Nonnull controller) {
         
-        if (!self.menuVisible){
-            [self showControlEditingView];
+        if (!self_weak_.menuVisible){
+            [self_weak_ showControlEditingView];
         } else {
             
             UIViewController *rvc = [[[UIApplication sharedApplication] keyWindow] rootViewController];

@@ -12,9 +12,10 @@ PESC_FILES = pesc.xm NSObject+AssociatedObjects.m KIF/UIEvent+KIFAdditions.m KIF
 PESC_FILES += PureLayout/ALView+PureLayout.m PureLayout/NSArray+PureLayout.m PureLayout/NSLayoutConstraint+PureLayout.m
 PESC_FILES += PESCPrefTableViewController.m PESCControlListTableViewController.m UIWindow+Additions.m
 PESC_FILES += RKDropdownAlert/RKDropdownAlert.m NSDictionary+nullRemoval.m
+PESC_FILES += extobjc/EXTRuntimeExtensions.m extobjc/EXTScope.m 
 PESC_LIBRARIES = substrate
 PESC_FRAMEWORKS = Foundation IOKit GameController
-PESC_CFLAGS += -I.-IRKDropdownAlert -IPureLayout -IKIF -fobjc-arc -miphoneos-version-min=9.0
+PESC_CFLAGS += -I.-IRKDropdownAlert -Iextobjc -IPureLayout -IKIF -fobjc-arc -miphoneos-version-min=9.0
 PESC_LDFLAGS = -miphoneos-version-min=9.0 -undefined dynamic_lookup
 #PESC_CODESIGN_FLAGS=-Slibrespring.xml
 

@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
 }
 
 - (void)close {
@@ -34,7 +34,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    
     return 14;
 }
 
@@ -42,25 +42,15 @@
     
     PESCControllerManager *shared = [PESCControllerManager sharedManager];
     NSDictionary *gpd = [shared controllerPreferences];
+    NSString *key = [self keyForRow:indexPath.row];
+    NSLog(@"key: %@", key);
+    NSString *value = gpd[key];
+    NSLog(@"value: %@", value);
+    PESCControlListTableViewController *controller = [[PESCControlListTableViewController alloc] initWithOriginalValue:value keyValue:key];
+    [self.navigationController pushViewController:controller animated:true];
     
     
-    if (indexPath.row == 0 && indexPath.section == 0){
-        
-        BOOL enabled = [gpd[ExperimentalControl] boolValue];
-        [shared updateGamplayValue:[NSNumber numberWithBool:!enabled] forKey:ExperimentalControl];
-        [[self tableView] reloadData];
-        
-    } else {
-        NSString *key = [self keyForRow:indexPath.row];
-        NSLog(@"key: %@", key);
-        NSString *value = gpd[key];
-         NSLog(@"value: %@", value);
-        PESCControlListTableViewController *controller = [[PESCControlListTableViewController alloc] initWithOriginalValue:value keyValue:key];
-        [self.navigationController pushViewController:controller animated:true];
-        
-    }
-        
-        
+    
     
 }
 
@@ -144,7 +134,7 @@
     return keyValue;
 }
 - (void)configureCell:(UITableViewCell *)cell forRow:(NSInteger)row {
- 
+    
     NSDictionary *gpd = [[PESCControllerManager sharedManager] controllerPreferences];
     //NSLog(@"controllerPreferences: %@", gpd);
     
@@ -238,7 +228,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
- 
+    
     [super viewWillAppear:animated];
     
     [self.tableView reloadData];
