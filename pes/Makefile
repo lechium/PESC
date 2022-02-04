@@ -1,7 +1,9 @@
+export PREFIX = $(THEOS)/toolchain/XcodeDefault.xctoolchain/usr/bin/
+#  comment the above line out if you have trouble building
 ARCHS = arm64e armv7 armv7s arm64
 TARGET = iphone
 export GO_EASY_ON_ME=1
-export SDKVERSION=12.1
+#export SDKVERSION=12.1
 THEOS_DEVICE_IP=eleven.local
 DEBUG=0
 
